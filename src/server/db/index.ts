@@ -11,7 +11,6 @@ import * as schema from "./schema";
 const globalForDb = globalThis as unknown as {
   conn: Pool | undefined;
 };
-console.log(env.SINGLE_STORE_HOST);
 const conn = globalForDb.conn ?? createPool({
   host: env.SINGLE_STORE_HOST,
   port: parseInt(env.SINGLE_STORE_PORT),
@@ -26,5 +25,5 @@ if (env.NODE_ENV !== "production") globalForDb.conn = conn;
 conn.addListener("error", (err) => {
   console.error("Database error", err);
 });
-
+//@ts-expect-error - Drizzle types are not up to date
 export const db = drizzle(conn, { schema });
