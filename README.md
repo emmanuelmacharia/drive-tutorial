@@ -11,6 +11,6 @@
 
 
 
-## motes - 36min
+## notes - 36min
 - [ ] we set up the db for development and connected to it
 - [ ] add the schema of the tables
