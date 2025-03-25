@@ -10,13 +10,12 @@ export const files = createTable("files_table", {
   size: text("size"),
   url: text("url"),
   parent: bigint("parent", {mode: "number", unsigned: true}).notNull(),
-  // type: text("type"),
 }, (t) => {
   return [index("parent_index").on(t.parent)];
 });
 
 
-export const folder = createTable("folders_table", {
+export const folders = createTable("folders_table", {
   id: bigint("id", {mode: "number", unsigned: true}).primaryKey().autoincrement(),
   name: text("name").notNull(),
   parent: bigint("parent", {mode: "number", unsigned: true}),

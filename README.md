@@ -12,3 +12,7 @@
 - [ ] add the schema of the tables
 - [ ] Manually insert examples
 - [ ] render them in the ui
+
+## notes - 1.07.11min
+- [x] inserted mock data into db
+
