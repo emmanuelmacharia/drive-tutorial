@@ -7,10 +7,8 @@
 - [ ] Add auth
 - [ ] Add file uploading
 
-
-
-
-
 ## notes - 36min
 - [ ] we set up the db for development and connected to it
 - [ ] add the schema of the tables
+- [ ] Manually insert examples
+- [ ] render them in the ui
