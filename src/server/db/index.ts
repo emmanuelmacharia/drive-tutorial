@@ -1,4 +1,4 @@
-import { drizzle } from "drizzle-orm/libsql";
+import { drizzle } from "drizzle-orm/mysql2";
 import { createPool, type Pool } from "mysql2";
 
 import { env } from "~/env";
@@ -22,8 +22,10 @@ const conn = globalForDb.conn ?? createPool({
 });
 
 if (env.NODE_ENV !== "production") globalForDb.conn = conn;
+
 conn.addListener("error", (err) => {
   console.error("Database error", err);
 });
-//@ts-expect-error - Drizzle types are not up to date
-export const db = drizzle(conn, { schema });
+
+
+export const db = drizzle(conn, { schema, mode: 'default' });

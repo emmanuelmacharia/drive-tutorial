@@ -8,11 +8,12 @@
 - [ ] Add file uploading
 
 ## notes - 36min
+
 - [ ] we set up the db for development and connected to it
 - [ ] add the schema of the tables
 - [ ] Manually insert examples
 - [ ] render them in the ui
 
 ## notes - 1.07.11min
-- [x] inserted mock data into db
 
+- [x] inserted mock data into db
