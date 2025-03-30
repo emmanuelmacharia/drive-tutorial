@@ -17,7 +17,7 @@ export const QUERIES = {
             if (folder.length === 0) {
                 throw new Error(`Folder with ID ${currentId} not found`);
             }
-            parents.push(folder[0]);
+            parents.unshift(folder[0]);
             currentId = folder[0]?.parent ?? null;
         }
         return parents;
