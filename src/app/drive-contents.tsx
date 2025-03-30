@@ -7,9 +7,12 @@ import { FileRow, FolderRow } from "./file-row"
 import type { files, folders } from "~/server/db/schema"
 import Link from "next/link"
 
-export default function DriveContents(props: { files: typeof files.$inferSelect[]; folders: typeof folders.$inferSelect[] }) {
+export default function DriveContents(props: { files: typeof files.$inferSelect[]; folders: typeof folders.$inferSelect[];  parents: typeof folders.$inferSelect[]; }) {
 
+  const {files, folders, parents} = props;
 
+  console.log(parents, parents.map((folder) => ({ name: folder.name, id: folder.id})));
+ 
   // const breadcrumbs = useMemo(() => {
   //   const breadcrumbs = [];
   //   let currentId = currentFolder;
@@ -26,8 +29,6 @@ export default function DriveContents(props: { files: typeof files.$inferSelect[
   //   return breadcrumbs;
   // }, [currentFolder, props.folders]);
 
-  const breadcrumbs: unknown[] = [];
-
   const handleUpload = () => {
     alert("Upload functionality would be implemented here")
   }
@@ -43,7 +44,7 @@ export default function DriveContents(props: { files: typeof files.$inferSelect[
             >
               My Drive
             </Link>
-            {breadcrumbs.map((folder) => (
+            {parents.map((folder) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
                 <Link
