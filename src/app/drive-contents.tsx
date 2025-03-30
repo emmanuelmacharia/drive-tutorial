@@ -1,68 +1,65 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
-import { Upload, ChevronRight } from "lucide-react"
-import { Button } from "~/components/ui/button"
-import { FileRow, FolderRow } from "./file-row"
-import type { files_table, folders_table } from "~/server/db/schema"
-import Link from "next/link"
+import { useMemo, useState } from "react";
+import { Upload, ChevronRight } from "lucide-react";
+import { Button } from "~/components/ui/button";
+import { FileRow, FolderRow } from "./file-row";
+import type { files_table, folders_table } from "~/server/db/schema";
+import Link from "next/link";
+import {
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  UserButton,
+} from "@clerk/nextjs";
 
-export default function DriveContents(props: { files: typeof files_table.$inferSelect[]; folders: typeof folders_table.$inferSelect[];  parents: typeof folders_table.$inferSelect[]; }) {
+export default function DriveContents(props: {
+  files: (typeof files_table.$inferSelect)[];
+  folders: (typeof folders_table.$inferSelect)[];
+  parents: (typeof folders_table.$inferSelect)[];
+}) {
+  const { files, folders, parents } = props;
 
-  const {files, folders, parents} = props;
-
-  console.log(parents, parents.map((folder) => ({ name: folder.name, id: folder.id})));
- 
-  // const breadcrumbs = useMemo(() => {
-  //   const breadcrumbs = [];
-  //   let currentId = currentFolder;
-
-  //   while (currentId !==1) {
-  //     const folder = props.folders.find((folder) => folder.id === currentId)
-  //     if (folder) {
-  //       breadcrumbs.unshift(folder)
-  //       currentId = folder.parent ?? 1
-  //     } else {
-  //       break
-  //     }
-  //   }
-  //   return breadcrumbs;
-  // }, [currentFolder, props.folders]);
-
+  console.log(
+    parents,
+    parents.map((folder) => ({ name: folder.name, id: folder.id })),
+  );
   const handleUpload = () => {
-    alert("Upload functionality would be implemented here")
-  }
-
+    alert("Upload functionality would be implemented here");
+  };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
+    <div className="min-h-screen bg-gray-900 p-8 text-gray-100">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center">
-            <Link href={"/folder/1"}
-              className="text-gray-300 mr-2"
-            >
+            <Link href={"/folder/1"} className="mr-2 text-gray-300">
               My Drive
             </Link>
             {parents.map((folder) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
-                <Link
-                  href={`/folder/${folder.id}`}
-                  className="text-gray-300"
-                >
+                <Link href={`/folder/${folder.id}`} className="text-gray-300">
                   {folder.name}
                 </Link>
               </div>
             ))}
           </div>
-          <Button onClick={handleUpload} className="bg-blue-600 text-white hover:bg-blue-700">
+          {/* <Button onClick={handleUpload} className="bg-blue-600 text-white hover:bg-blue-700">
             <Upload className="mr-2" size={20} />
             Upload
-          </Button>
+          </Button> */}
+          <SignedOut>
+            <SignInButton />
+            {/* <SignUpButton /> */}
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
-        <div className="bg-gray-800 rounded-lg shadow-xl">
-          <div className="px-6 py-4 border-b border-gray-700">
+        <div className="rounded-lg bg-gray-800 shadow-xl">
+          <div className="border-b border-gray-700 px-6 py-4">
             <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-400">
               <div className="col-span-6">Name</div>
               <div className="col-span-3">Type</div>
@@ -80,5 +77,5 @@ export default function DriveContents(props: { files: typeof files_table.$inferS
         </div>
       </div>
     </div>
-  )
+  );
 }
