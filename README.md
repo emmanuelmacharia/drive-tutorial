@@ -20,6 +20,6 @@
 - [x] inserted mock data into db
 
 ## notes 
-- [ ] Change folder to link components, remove client state
+- [x] Change folder to link components, remove client state
 - [ ] clean up database and data fetching patterns
 - [ ] real homepage
