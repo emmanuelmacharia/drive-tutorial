@@ -9,12 +9,12 @@ export const QUERIES = {
         const parents = [];
         let currentId: number | null = folderId;
         while (currentId !== null && currentId !== 1) {
-            const folder  =await db
+            const folder = await db
                 .selectDistinct()
                 .from(foldersSchema)
                 .where(eq(foldersSchema.id, currentId));
     
-            if (folder.length === 0) {
+             if (!folder[0]) {
                 throw new Error(`Folder with ID ${currentId} not found`);
             }
             parents.unshift(folder[0]);
