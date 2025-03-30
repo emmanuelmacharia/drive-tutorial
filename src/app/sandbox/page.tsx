@@ -9,13 +9,13 @@ export default function SandboxPage() {
         <form className="flex gap-4" action={
             async () => {
                "use server";
-                const folderInsert = await db.insert(folders).values(
-                    mockFolders.map(
-                    (folder, index) => ({
-                    id: index + 1,
-                    name: folder.name,
-                    parent: index !== 0 ? 1 : null
-                })));
+                // const folderInsert = await db.insert(folders).values(
+                //     mockFolders.map(
+                //     (folder, index) => ({
+                //     id: index + 1,
+                //     name: folder.name,
+                //     parent: index !== 0 ? 1 : null
+                // })));
                 const fileInsert = await db.insert(files).values(
                     mockFiles.map((file, index) => ({
                     id: index + 1,
@@ -24,7 +24,7 @@ export default function SandboxPage() {
                     size: file.size,
                     url: file.url
                 })));
-                console.log("Inserted folders:", folderInsert);
+                // console.log("Inserted folders:", folderInsert);
                 console.log("Inserted files:", fileInsert);
             }
         }>
