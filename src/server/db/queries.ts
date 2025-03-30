@@ -2,7 +2,7 @@ import 'server-only';
 
 import { eq } from "drizzle-orm";
 import { db } from ".";
-import { files_table as fileSchema, folders_table as foldersSchema } from "~/server/db/schema"
+import { DB_FileType, files_table as fileSchema, folders_table as foldersSchema } from "~/server/db/schema"
 
 export const QUERIES = {
     getAllParentsForFolder: async function (folderId: number) {
@@ -31,5 +31,26 @@ export const QUERIES = {
     getFolders: async function (folderId: number) {
         const foldersPromise = await db.select().from(foldersSchema).where(eq(foldersSchema.parent, folderId));
         return foldersPromise
+    }, 
+    getFolderById: async function (folderId: number) {
+        const folder = await db.select().from(foldersSchema).where(eq(foldersSchema.id, folderId));
+        if (!folder[0]) {
+            throw new Error(`Folder with ID ${folderId} not found`);
+        }
+        return folder[0];
     }
+}
+
+export const MUTATIONS = {
+    createFile: async function (input : {
+        file: {
+        name: string; 
+        size: number;
+        url: string;
+        parent: number;
+        ownerId: string;
+    }, userId: string}) {
+        if (!input.userId) throw new Error("Unauthorized");
+        return await db.insert(fileSchema).values(input.file)
+    },
 }
