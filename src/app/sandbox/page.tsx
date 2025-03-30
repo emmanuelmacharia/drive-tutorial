@@ -1,6 +1,6 @@
 import { db } from "~/server/db";
 import { mockFolders, mockFiles } from "~/lib/mock-data";
-import { files, folders } from "~/server/db/schema";
+import { files_table, folders_table } from "~/server/db/schema";
 
 export default function SandboxPage() {
     return <div className="flex flex-col gap-4">
@@ -16,7 +16,7 @@ export default function SandboxPage() {
                 //     name: folder.name,
                 //     parent: index !== 0 ? 1 : null
                 // })));
-                const fileInsert = await db.insert(files).values(
+                const fileInsert = await db.insert(files_table).values(
                     mockFiles.map((file, index) => ({
                     id: index + 1,
                     name: file.name,
