@@ -1,36 +1,70 @@
-
-import { Folder as FolderIcon, FileIcon } from "lucide-react"
+import { Folder as FolderIcon, FileIcon } from "lucide-react";
 import Link from "next/link";
 import type { files_table, folders_table } from "~/server/db/schema";
 
-export function FileRow(props: { file:  typeof files_table.$inferSelect}) { 
-    const { file } = props;
-    return <li key={file.id} className="px-6 py-4 border-b border-gray-700 hover:bg-gray-750">
-    <div className="grid grid-cols-12 gap-4 items-center">
-      <div className="col-span-6 flex items-center">
-          <a href={file.url} className="flex items-center text-gray-100 hover:text-blue-400" target="_blank">
+export function FileRow(props: { file: typeof files_table.$inferSelect }) {
+  const { file } = props;
+
+  const getFileSizes = (size: number) => {
+    const KB = 1024;
+    const MB = KB * 1024;
+    const GB = MB * 1024;
+    const TB = GB * 1024;
+
+    if (size < 1024) return `${size} B`;
+    if (size > KB && size < MB) return `${(size / KB).toFixed(2)} KB`;
+    if (size > MB && size < GB) return `${(size / MB).toFixed(2)} MB`;
+    if (size > GB && size < TB) return `${(size / GB).toFixed(2)} GB`;
+    if (size > TB) return `${(size / TB).toFixed(2)} TB`;
+  };
+
+  return (
+    <li
+      key={file.id}
+      className="hover:bg-gray-750 border-b border-gray-700 px-6 py-4"
+    >
+      <div className="grid grid-cols-12 items-center gap-4">
+        <div className="col-span-6 flex items-center">
+          <a
+            href={file.url}
+            className="flex items-center text-gray-100 hover:text-blue-400"
+            target="_blank"
+          >
             <FileIcon className="mr-3" size={20} />
             {file.name}
           </a>
+        </div>
+        <div className="col-span-3 text-gray-400"> File </div>
+        <div className="col-span-3 text-gray-400">
+          {getFileSizes(file.size)}
+        </div>
       </div>
-      <div className="col-span-3 text-gray-400"></div>
-      <div className="col-span-3 text-gray-400">{file.size}</div>
-    </div>
-  </li>
+    </li>
+  );
 }
 
-export function FolderRow( props : {folder: typeof folders_table.$inferSelect} ) { 
-    const { folder } = props
-    return <li key={folder.id} className="px-6 py-4 border-b border-gray-700 hover:bg-gray-750">
-    <div className="grid grid-cols-12 gap-4 items-center">
-      <div className="col-span-6 flex items-center">
-          <Link href={`/folder/${folder.id}`} className="flex items-center text-gray-100 hover:text-blue-400">
+export function FolderRow(props: {
+  folder: typeof folders_table.$inferSelect;
+}) {
+  const { folder } = props;
+  return (
+    <li
+      key={folder.id}
+      className="hover:bg-gray-750 border-b border-gray-700 px-6 py-4"
+    >
+      <div className="grid grid-cols-12 items-center gap-4">
+        <div className="col-span-6 flex items-center">
+          <Link
+            href={`/folder/${folder.id}`}
+            className="flex items-center text-gray-100 hover:text-blue-400"
+          >
             <FolderIcon className="mr-3" size={20} />
             {folder.name}
           </Link>
+        </div>
+        <div className="col-span-3 text-gray-400"> Folder </div>
+        <div className="col-span-3 text-gray-400"></div>
       </div>
-      <div className="col-span-3 text-gray-400"></div>
-      <div className="col-span-3 text-gray-400"></div>
-    </div>
-  </li>
+    </li>
+  );
 }
