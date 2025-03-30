@@ -23,11 +23,12 @@
 
 - [x] Change folder to link components, remove client state
 - [x] clean up database and data fetching patterns
-- [ ] real homepage
 
 ## notes 2:20:46 min
 
-- [ ]  Upload fiiles to the correct folder
+- [x] Add ownership to files
+- [x]  Upload fiiles to the correct folder
 - [ ] Delete files button
 - [ ] Allow files thay arent images to be uploaded
 - [ ] Retrieve the file type from uploadthing and save it in db
+- [ ] real homepage

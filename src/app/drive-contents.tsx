@@ -13,6 +13,7 @@ export default function DriveContents(props: {
   files: (typeof files_table.$inferSelect)[];
   folders: (typeof folders_table.$inferSelect)[];
   parents: (typeof folders_table.$inferSelect)[];
+  currentFolderId: number;
 }) {
   const { files, folders, parents } = props;
 
@@ -71,6 +72,7 @@ export default function DriveContents(props: {
         </div>
         <UploadButton
           endpoint="imageUploader"
+          input={{ folderId: props.currentFolderId }}
           onClientUploadComplete={() => navigate.refresh()}
         />
       </div>
