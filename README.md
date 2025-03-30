@@ -33,3 +33,6 @@
 - [x] Display file type and file sizes correctly in the view
 - [ ] Retrieve the file type from uploadthing and save it in db
 - [ ] real homepage
+
+## notes 2:40.44
+- [ ] Real homepage + onboarding
