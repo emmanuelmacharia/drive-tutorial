@@ -24,12 +24,12 @@ export const QUERIES = {
     },
     
     getFiles: async function (folderId: number) {
-       const filePromise =  await db.select().from(fileSchema).where(eq(fileSchema.parent, folderId));
+       const filePromise =  await db.select().from(fileSchema).where(eq(fileSchema.parent, folderId)).orderBy(fileSchema.createdAt);
        return filePromise
     },
     
     getFolders: async function (folderId: number) {
-        const foldersPromise = await db.select().from(foldersSchema).where(eq(foldersSchema.parent, folderId));
+        const foldersPromise = await db.select().from(foldersSchema).where(eq(foldersSchema.parent, folderId)).orderBy(foldersSchema.createdAt);
         return foldersPromise
     }, 
     getFolderById: async function (folderId: number) {
