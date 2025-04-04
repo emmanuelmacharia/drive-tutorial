@@ -28,15 +28,15 @@
 
 - [x] Add ownership to files
 - [x]  Upload fiiles to the correct folder
-- [ ]  Delete files button
+- [x]  Delete files button
 - [x] Allow files thay arent images to be uploaded
 - [x] Display file type and file sizes correctly in the view
-- [ ] Retrieve the file type from uploadthing and save it in db
-- [ ] real homepage
+- [x] Retrieve the file type from uploadthing and save it in db
+- [x] real homepage
 
 ## notes 2:40.44
 - [ ] Real homepage + onboarding
 
 ## followup
 
-[ ] folder deletion - make sure to recursively delete all files and folders.
+[ ] folder deletion - make sure to recursively delete all files and folders
