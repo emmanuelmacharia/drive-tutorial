@@ -36,3 +36,7 @@
 
 ## notes 2:40.44
 - [ ] Real homepage + onboarding
+
+## followup
+
+[ ] folder deletion - make sure to recursively delete all files and folders.
