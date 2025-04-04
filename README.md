@@ -35,8 +35,32 @@
 - [x] real homepage
 
 ## notes 2:40.44
-- [ ] Real homepage + onboarding
+
+- [x] Real homepage + onboarding
 
 ## followup
 
 [ ] folder deletion - make sure to recursively delete all files and folders
+[ ] create a server action that takes a name, parentid, and creates a folder with that name and parentid; (don't forget to set the owner id)
+
+### Toasts
+
+[ ] Notifications for user actions
+
+### Access Control
+
+[ ] When a user is signed in, they cannot view other users files
+[ ] Try doing file sharing
+
+### Make a file view page
+
+[ ] make a page within which to view the file from
+
+### Loading state for file
+
+[ ] Grey out the file while it's being deleted
+
+### folder and file management
+
+[ ] Make the folder name editable
+[ ] Make the file name editable
