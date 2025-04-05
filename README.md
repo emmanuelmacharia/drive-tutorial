@@ -41,15 +41,15 @@
 ## followup
 
 [ ] folder deletion - make sure to recursively delete all files and folders
-[ ] create a server action that takes a name, parentid, and creates a folder with that name and parentid; (don't forget to set the owner id)
+[x] create a server action that takes a name, parentid, and creates a folder with that name and parentid; (don't forget to set the owner id)
 
 ### Toasts
 
-[ ] Notifications for user actions
+[x] Notifications for user actions
 
 ### Access Control
 
-[ ] When a user is signed in, they cannot view other users files
+[x] When a user is signed in, they cannot view other users files
 [ ] Try doing file sharing
 
 ### Make a file view page
