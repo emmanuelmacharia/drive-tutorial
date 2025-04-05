@@ -55,6 +55,23 @@ export async function createFolder(input: { name: string; parentId: number }) {
     return { error: "Unauthorized" };
   }
 
+  if (!input.name || !input.parentId) {
+    return { error: "Invalid input" };
+  }
+
+  const [parentFolder] = await db
+    .select()
+    .from(foldersSchema)
+    .where(eq(foldersSchema.id, input.parentId));
+
+  if (!parentFolder) {
+    return { error: "Parent folder not found" };
+  }
+
+  if (parentFolder.ownerId !== session.userId) {
+    return { error: "Unauthorized" };
+  }
+
   const newFolder = await MUTATIONS.createFolder({
     name: input.name,
     parentId: input.parentId,
@@ -66,4 +83,6 @@ export async function createFolder(input: { name: string; parentId: number }) {
   }
 
   await forceRefesh();
+
+  return { success: true, message: "Folder created" };
 }
