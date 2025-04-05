@@ -1,8 +1,22 @@
-import { Folder as FolderIcon, FileIcon, Trash2Icon } from "lucide-react";
+import {
+  Folder as FolderIcon,
+  FileIcon,
+  Trash2Icon,
+  MoreHorizontal,
+  PencilLine,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { deleteFile } from "~/server/db/actions";
 import type { files_table, folders_table } from "~/server/db/schema";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
 
 export function FileRow(props: { file: typeof files_table.$inferSelect }) {
   const { file } = props;
@@ -42,14 +56,38 @@ export function FileRow(props: { file: typeof files_table.$inferSelect }) {
           {getFileSizes(file.size)}
         </div>
         <div className="col-span-1 text-gray-400">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => deleteFile(file.id)}
-            aria-label="Delete file"
-          >
-            <Trash2Icon size={16} />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" aria-label="Options">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => {
+                  console.log("Edit file");
+                }}
+                className="cursor-pointer"
+              >
+                <span className="mr-2">
+                  <PencilLine />
+                </span>
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => deleteFile(file.id)}
+                className="cursor-pointer"
+              >
+                <span className="mr-2">
+                  <Trash2Icon />
+                </span>
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </li>
