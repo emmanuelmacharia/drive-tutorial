@@ -34,6 +34,11 @@ export function FileRow(props: { file: typeof files_table.$inferSelect }) {
     if (size > TB) return `${(size / TB).toFixed(2)} TB`;
   };
 
+  const getFileTypes = (name: string) => {
+    const ext = name.split(".").pop();
+    return ext?.toUpperCase() ?? "File";
+  };
+
   return (
     <li
       key={file.id}
@@ -50,7 +55,10 @@ export function FileRow(props: { file: typeof files_table.$inferSelect }) {
             {file.name}
           </a>
         </div>
-        <div className="col-span-2 text-gray-400"> File </div>{" "}
+        <div className="col-span-2 text-gray-400">
+          {" "}
+          {getFileTypes(file.name)}{" "}
+        </div>{" "}
         {/* TODO: add file type */}
         <div className="col-span-3 text-gray-400">
           {getFileSizes(file.size)}
