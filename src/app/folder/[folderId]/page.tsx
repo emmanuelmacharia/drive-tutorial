@@ -42,7 +42,7 @@ export default async function GoogleDriveClone(props: {
   const currentFolder = folders.find(
     (folder) => folder.parent === parsedFolderId,
   );
-  // if (currentFolder?.ownerId !== session.userId) {
+  // if (rootFolderId?.ownerId !== session.userId) {
   //   return <div>{`You do not have access to this folder!`}</div>; // should not have access to the folder
   // }
 

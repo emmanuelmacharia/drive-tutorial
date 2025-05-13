@@ -23,29 +23,31 @@ export default async function DrivePage() {
 
   if (!rootFolder) {
     // create the root folder for the user
-    return (
-      <>
-        <form
-          action={async () => {
-            "use server";
-            const session = await auth();
-            if (!session.userId) {
-              return redirect("/sign-in");
-            }
+    // return (
+    //   <>
+    //     <form
+    //       action={async () => {
+    //         "use server";
+    //         const session = await auth();
+    //         if (!session.userId) {
+    //           return redirect("/sign-in");
+    //         }
 
-            const rootFolderId = await MUTATIONS.onboardUser(session.userId);
-            if (typeof rootFolderId === "object" && "error" in rootFolderId) {
-              // Handle error case, e.g., show a message to the user
-              console.error("Error creating root folder:", rootFolderId.error);
-              return;
-            }
-            return redirect(`/folder/${rootFolderId}`);
-          }}
-        >
-          <Button> Create New Drive</Button>
-        </form>
-      </>
-    );
+    //         const rootFolderId = await MUTATIONS.onboardUser(session.userId);
+    //         if (typeof rootFolderId === "object" && "error" in rootFolderId) {
+    //           // Handle error case, e.g., show a message to the user
+    //           console.error("Error creating root folder:", rootFolderId.error);
+    //           return;
+    //         }
+    //         return redirect(`/folder/${rootFolderId}`);
+    //       }}
+    //     >
+    //       <Button> Create New Drive</Button>
+    //     </form>
+    //   </>
+    // );
+
+    return <div>{`You haven't been whitelisted to access this service`}</div>;
   }
 
   return redirect(`/folder/${rootFolder.id}`);
